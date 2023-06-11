@@ -6,8 +6,8 @@
 
 ### Jira
 
-- **[JIRA](https://github.com/SunM1sty/involta-test/)** 
-*this link will redirect you on repository page*
+- **[JIRA](https://github.com/SunM1sty/involta-test/)**
+  _this link will redirect you on repository page_
 
 ## Description
 
