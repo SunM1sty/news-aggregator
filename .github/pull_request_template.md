@@ -2,11 +2,12 @@
 
 ### Name
 
-** Task Name **
+- **Task Name**
 
 ### Jira
 
-** [JIRA]() **
+- **[JIRA](https://github.com/SunM1sty/involta-test/)** 
+*this link will redirect you on repository page*
 
 ## Description
 
