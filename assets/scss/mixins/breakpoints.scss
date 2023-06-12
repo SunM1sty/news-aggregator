@@ -1,5 +1,3 @@
-@import '../variables';
-
 @mixin desktop-xxl {
   @media (min-width: ($desktop-xl * 1px)) {
     @content;
