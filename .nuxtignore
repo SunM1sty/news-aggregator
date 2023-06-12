@@ -1,0 +1,2 @@
+# ignore Storybook stories files
+components/**/*.stories.ts
