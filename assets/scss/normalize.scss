@@ -21,6 +21,7 @@ p,
 blockquote,
 pre,
 a,
+a:active,
 code,
 em,
 img,
@@ -104,4 +105,9 @@ table {
 
 input {
   border-radius: 0;
+}
+
+a,
+:active {
+  color: inherit;
 }

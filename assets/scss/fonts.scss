@@ -1,6 +1,7 @@
 @mixin h1-font {
-  font-family: Roboto;
+  font-family: $font-arial;
   font-style: normal;
-  font-weight: 500;
-  font-size: 34px;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 41px;
 }
