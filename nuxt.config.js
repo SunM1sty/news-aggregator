@@ -14,12 +14,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  css: [
-    '~/assets/scss/normalize.scss',
-    '~/assets/scss/variables.scss',
-    '~/assets/scss/mixins.scss',
-    '~/assets/scss/fonts.scss'
-  ],
+  css: ['~/assets/scss/normalize.scss'],
 
   styleResources: {
     scss: ['~/assets/scss/variables.scss', '~/assets/scss/mixins.scss', '~/assets/scss/fonts.scss']
@@ -28,7 +23,6 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
