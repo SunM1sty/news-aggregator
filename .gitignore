@@ -77,3 +77,7 @@ dist
 
 # Service worker
 sw.*
+
+# Storybook and Storybook static directories
+.nuxt-storybook
+storybook-static
