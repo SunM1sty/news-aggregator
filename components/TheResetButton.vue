@@ -1,5 +1,17 @@
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  methods: {
+    handleResetFilters(): void {
+      this.$router.push({ path: this.$route.path })
+      this.$store.dispatch('fetchNews')
+    }
+  }
+})
+</script>
+
 <template>
-  <button class="reset-button">
+  <button class="reset-button" @click="handleResetFilters">
     <img src="~static/reset-button-icon.svg" class="icon" draggable="false" />
   </button>
 </template>
