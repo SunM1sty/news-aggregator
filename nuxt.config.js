@@ -27,10 +27,6 @@ export default {
         path: '/:page',
         component: resolve(__dirname, 'pages/index.vue')
       })
-      routes.push({
-        path: '/',
-        component: resolve(__dirname, 'pages/index.vue')
-      })
     }
   },
 
