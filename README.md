@@ -19,8 +19,8 @@ Requirements:
 - Node.js
 
 Clone repo:
- - by https protocol: git clone https://github.com/SunM1sty/involta-test
- - via SSH: git clone git@github.com:SunM1sty/involta-test.git
+ - by https protocol: git clone https://github.com/SunM1sty/news-aggregator.git
+ - via SSH: git clone git@github.com:SunM1sty/news-aggregator.git
 
 Without docker:
 ```
