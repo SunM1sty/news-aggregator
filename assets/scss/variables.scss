@@ -22,13 +22,15 @@ $color-darkgray: #656565;
 $color-white: #fff;
 $color-light: #e5e5e5;
 $color-light-blue: #44b8ea;
-$color-light-gray: #858a8f;
+$color-light-gray: #dcdcdc;
 $color-green: #339f37;
+$color-blue: #0029ff;
 
 // Fonts
 $font-inter: 'Inter', sans-serif;
 $font-lato: 'Lato', sans-serif;
 $font-roboto: 'Roboto', sans-serif;
+$font-arial: 'Arial';
 
 // Easing transitions
 $duration-normal: 0.4s;
@@ -45,3 +47,10 @@ $laptop: 1440;
 $tablet: 768;
 $mobile: 320;
 $desktop-vh: 750;
+
+// Border radius
+$round-border: 100%;
+$default-border: 3px;
+
+// Box shadow
+$default-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.05);
