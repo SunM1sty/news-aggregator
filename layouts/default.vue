@@ -1,9 +1,24 @@
+<script>
+export default {
+  watch: {
+    $route: {
+      handler(to) {
+        this.$store.dispatch('handleFilteredNews', to.query)
+      },
+      immediate: true
+    }
+  },
+  async beforeMount() {
+    await this.$store.dispatch('fetchNews')
+    this.$store.dispatch('handleFilteredNews', this.$route.query)
+  }
+}
+</script>
+
 <template>
   <div class="page-content">
     <TheHeader />
-    <main>
-      <Nuxt />
-    </main>
+    <Nuxt />
   </div>
 </template>
 
