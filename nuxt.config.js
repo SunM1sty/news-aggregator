@@ -20,6 +20,20 @@ export default {
     scss: ['~/assets/scss/variables.scss', '~/assets/scss/mixins.scss', '~/assets/scss/fonts.scss']
   },
 
+  router: {
+    linkActiveClass: 'active-link',
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '/:page',
+        component: resolve(__dirname, 'pages/index.vue')
+      })
+      routes.push({
+        path: '/',
+        component: resolve(__dirname, 'pages/index.vue')
+      })
+    }
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
