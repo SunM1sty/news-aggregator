@@ -1,44 +1,31 @@
 <script>
 export default {
-  data() {
-    return {
-      type: 'tiles'
+  watch: {
+    $route: {
+      handler(to) {
+        this.$store.dispatch('handleFilteredNews', to.query)
+      },
+      immediate: true
     }
   },
-  mounted() {
-    this.type = localStorage.getItem('NewsOutputType')
-    window.addEventListener('news-output-type-localstorage-changed', event => {
-      this.type = event.detail.storage
-    })
+  async beforeMount() {
+    await this.$store.dispatch('fetchNews')
+    this.$store.dispatch('handleFilteredNews', this.$route.query)
   }
 }
 </script>
 
 <template>
-  <main class="main">
-    <TheFilters />
-    <TheNewsList :type="$data.type" />
-    <ThePagination />
-  </main>
+  <div class="page-content">
+    <TheHeader />
+    <Nuxt />
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.main {
-  margin-top: 25px;
-
-  @include desktop-xxl {
-    width: 1440px;
-  }
-
-  @include desktop-xl {
-    min-width: 1280px;
-    width: 80%;
-  }
-
-  @include desktop {
-    min-width: 1000px;
-    max-height: 1440px;
-    width: 90%;
-  }
+.page-content {
+  @include flex-v-center;
+  flex-direction: column;
+  padding: 0 15px;
 }
 </style>
