@@ -11,6 +11,8 @@
 <style lang="scss" scoped>
 .header {
   @include flex-h-sb-v-center;
+  flex-wrap: wrap;
+
   width: 100%;
   gap: 20px;
 
