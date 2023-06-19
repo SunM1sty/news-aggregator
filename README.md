@@ -8,9 +8,9 @@
 
 ## Architecture
 
- ![Architecture](https://github.com/SunM1sty/involta-test/assets/71171622/bca02edf-7711-4f31-a58f-207ec3f31565)
- ![State Architecture](https://github.com/SunM1sty/involta-test/assets/71171622/f52015cc-a485-4037-87b3-6af0e94c36f9)
- ![Filtering Architecture](https://github.com/SunM1sty/involta-test/assets/71171622/47d988ed-d9ed-409a-bef1-a3311d2f416c)
+ ![App Architecture](https://github.com/SunM1sty/news-aggregator/assets/71171622/b3d084cc-cb52-4f3b-8d83-e12dec53f015)
+ ![State Architecture](https://github.com/SunM1sty/news-aggregator/assets/71171622/3d1263f3-5f74-44a7-a4ed-efab969c5626)
+ ![Parsing RSS feed Architecture](https://github.com/SunM1sty/news-aggregator/assets/71171622/6d33f229-9fa3-4fbe-ad98-6bad8c841844)
 
 ### Install
 Requirements:
