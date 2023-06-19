@@ -1,0 +1,9 @@
+version: '3'
+services:
+  nuxt:
+    build: .
+    container_name: development-nuxt
+    ports:
+      - 3000:3000
+    command: npm run dev
+    restart: always
