@@ -1,7 +1,33 @@
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  data() {
+    return {
+      searchFilter: (this.$route.query.search || '') as string
+    }
+  },
+  methods: {
+    handleSearchFilter(): void {
+      const queries = this.$route.query
+
+      if (queries.search && this.searchFilter.trim() === '') {
+        this.$router.push({ query: { ...queries, search: null } })
+      }
+
+      if (this.searchFilter.trim() !== '') {
+        const search = this.searchFilter.trim()
+
+        this.$router.push({ query: { ...queries, search } })
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <div class="search-block">
-    <input type="text" class="input" />
-    <button class="button">
+    <input v-model="searchFilter" type="text" class="input" />
+    <button class="button" @click="handleSearchFilter">
       <img src="~static/search-icon.svg" class="icon" width="20" height="20" />
     </button>
   </div>
