@@ -18,8 +18,9 @@ Requirements:
 - Git
 - Node.js
 
-Clone repo with git cli by https protocol: git clone https://github.com/SunM1sty/involta-test
-Or clone via SSH: git clone git@github.com:SunM1sty/involta-test.git
+Clone repo:
+ - by https protocol: git clone https://github.com/SunM1sty/involta-test
+ - via SSH: git clone git@github.com:SunM1sty/involta-test.git
 
 Without docker:
 ```
@@ -36,7 +37,7 @@ npm run start
 npm run generate
 ```
 With docker and docker-compose (Coming soon):
-\* On linux: if you didn't add docker/docker-compose package as super user, you should use **sudo**
+* On linux: if you dont't add docker/docker-compose package as super user, you should use **sudo**
 ```
 sudo docker-compose up / docker-compose up
 ```
