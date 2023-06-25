@@ -1,4 +1,4 @@
-export type NewsOutputItem = {
+export type NewsDisplayOption = {
   type: string
   imgName: string
 }
