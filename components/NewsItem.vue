@@ -1,5 +1,5 @@
 <template>
-  <div v-if="displayType === 'tiles'" class="news-card tile">
+  <div v-if="displayType === 'grid'" class="news-card tile">
     <div class="information-tiles">
       <a :href="newsItem.link" target="_blank" rel="noopener">
         <h3 class="title text-overflow">{{ newsItem.title }}</h3>

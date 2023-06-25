@@ -23,6 +23,11 @@ export const state = (): StateType => ({
       name: 'Mos.ru',
       resource: 'mos.ru',
       link: 'https://www.mos.ru/rss'
+    },
+    {
+      name: 'ООН',
+      resource: 'news.un.org',
+      link: 'https://news.un.org/feed/subscribe/ru/news/region/europe/feed/rss.xml'
     }
   ],
   newsDisplayOptions: [
