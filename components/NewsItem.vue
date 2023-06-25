@@ -1,5 +1,5 @@
 <template>
-  <div v-if="type === 'tiles'" class="news-card tile">
+  <div v-if="displayType === 'grid'" class="news-card tile">
     <div class="information-tiles">
       <a :href="newsItem.link" target="_blank" rel="noopener">
         <h3 class="title text-overflow">{{ newsItem.title }}</h3>
@@ -21,9 +21,16 @@
       <p class="posted">{{ newsItem.posted }}</p>
     </div>
   </div>
-  <div v-else-if="type === 'list'" class="news-card list">
+  <div v-else-if="displayType === 'list'" class="news-card list">
     <div class="content">
-      <img :src="newsItem.image" class="image" width="220" height="100" />
+      <img
+        :src="newsItem.image"
+        class="image"
+        width="220"
+        height="100"
+        loading="lazy"
+        :alt="`Изображение для новости ${newsItem.title}`"
+      />
       <div class="information-list">
         <a :href="newsItem.link" target="_blank" rel="noopener">
           <h3 class="title text-overflow">{{ newsItem.title }}</h3>
@@ -56,11 +63,10 @@ export default Vue.extend({
       type: Object,
       required: true
     } as PropOptions<NewsItem>,
-    type: {
+    displayType: {
       type: String,
-      required: true,
-      default: 'tiles'
-    }
+      required: true
+    } as PropOptions<string>
   }
 })
 </script>

@@ -20,6 +20,8 @@ export default {
     scss: ['~/assets/scss/variables.scss', '~/assets/scss/mixins.scss', '~/assets/scss/fonts.scss']
   },
 
+  serverMiddleware: [{ path: '/api/rss', handler: '~/server-middleware/proxy.js' }],
+
   router: {
     linkActiveClass: 'active-link',
     extendRoutes(routes, resolve) {
@@ -27,7 +29,8 @@ export default {
         path: '/:page',
         component: resolve(__dirname, 'pages/index.vue')
       })
-    }
+    },
+    middleware: ['redirect']
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

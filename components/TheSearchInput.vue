@@ -1,23 +1,59 @@
 <script lang="ts">
 import Vue from 'vue'
+
 export default Vue.extend({
   data() {
     return {
-      searchFilter: (this.$route.query.search || '') as string
+      debounceTimeout: 500,
+      debounceTimer: null as NodeJS.Timeout | null
+    }
+  },
+  computed: {
+    searchFilterValue: {
+      get() {
+        return this.$store.getters.getSearchFilter
+      },
+      set(value: string) {
+        if (value === '') this.$store.dispatch('handleSearchFilter', null)
+        if (value.trim()) this.$store.dispatch('handleSearchFilter', value.trim())
+      }
+    },
+    resourceFilterValue() {
+      return this.$store.getters.getResourceFilter
     }
   },
   methods: {
-    handleSearchFilter(): void {
-      const queries = this.$route.query
+    onInputSearchFilter() {
+      this.debounceTimer && clearTimeout(this.debounceTimer)
 
-      if (queries.search && this.searchFilter.trim() === '') {
-        this.$router.push({ query: { ...queries, search: null } })
+      this.debounceTimer = setTimeout(this.pushSearchQueryParam, this.debounceTimeout)
+    },
+    pushSearchQueryParam() {
+      if (this.searchFilterValue === null) {
+        if (this.resourceFilterValue) {
+          this.$router.push({
+            params: { page: '1' },
+            query: { resource: this.resourceFilterValue }
+          })
+        } else {
+          this.$router.push({
+            params: { page: '1' }
+          })
+        }
       }
 
-      if (this.searchFilter.trim() !== '') {
-        const search = this.searchFilter.trim()
-
-        this.$router.push({ query: { ...queries, search } })
+      if (this.searchFilterValue !== null && this.searchFilterValue.trim()) {
+        if (this.resourceFilterValue) {
+          this.$router.push({
+            params: { page: '1' },
+            query: { resource: this.resourceFilterValue, search: this.searchFilterValue.trim() }
+          })
+        } else {
+          this.$router.push({
+            params: { page: '1' },
+            query: { search: this.searchFilterValue.trim() }
+          })
+        }
       }
     }
   }
@@ -26,8 +62,8 @@ export default Vue.extend({
 
 <template>
   <div class="search-block">
-    <input v-model="searchFilter" type="text" class="input" />
-    <button class="button" @click="handleSearchFilter">
+    <input v-model="searchFilterValue" type="text" class="input" @input="onInputSearchFilter" />
+    <button class="button" @click="pushSearchQueryParam">
       <img src="~static/search-icon.svg" class="icon" width="20" height="20" />
     </button>
   </div>

@@ -6,7 +6,7 @@ import type { NewsItem } from '~/types/NewsItem'
 import { getFormatedDate } from '~/utils/formatDate'
 
 export const parseXml = async (sourceUrl: string) => {
-  const response = await axios.get('http://isuctschedule.ru:8000/' + sourceUrl)
+  const response = await axios.get(sourceUrl)
 
   const xml = response.data
 
@@ -18,25 +18,29 @@ export const parseXml = async (sourceUrl: string) => {
       return
     }
 
-    const resource = result.rss.channel[0].link[0]
+    try {
+      const resource = result.rss.channel[0].link[0]
 
-    result.rss.channel[0].item.map((item: any) => {
-      const date = getFormatedDate(item.pubDate[0] as string)
-      const newsItem: NewsItem = {
-        id: (Date.now() + Math.random()).toString(),
-        title: item.title[0],
-        link: item.link[0],
-        posted: date,
-        resource,
-        image: item.enclosure[0].$.url
-      }
+      result.rss.channel[0].item.map((item: any) => {
+        const date = getFormatedDate(item.pubDate[0] as string)
+        const newsItem: NewsItem = {
+          id: (Date.now() + Math.random()).toString(),
+          title: item.title[0],
+          link: item.link[0],
+          posted: date,
+          resource,
+          image: item.enclosure[0].$.url
+        }
 
-      if (item.description) {
-        newsItem.description = item.description[0]
-      }
+        if (item.description) {
+          newsItem.description = item.description[0]
+        }
 
-      newsArray.push(newsItem)
-    })
+        newsArray.push(newsItem)
+      })
+    } catch (error) {
+      throw new Error('Failed to Parse XML')
+    }
   })
 
   return newsArray
