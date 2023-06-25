@@ -29,7 +29,8 @@ export default {
         path: '/:page',
         component: resolve(__dirname, 'pages/index.vue')
       })
-    }
+    },
+    middleware: ['redirect']
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
