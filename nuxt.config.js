@@ -20,6 +20,8 @@ export default {
     scss: ['~/assets/scss/variables.scss', '~/assets/scss/mixins.scss', '~/assets/scss/fonts.scss']
   },
 
+  serverMiddleware: [{ path: '/api/rss', handler: '~/server-middleware/proxy.js' }],
+
   router: {
     linkActiveClass: 'active-link',
     extendRoutes(routes, resolve) {
