@@ -1,50 +1,49 @@
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
 
-import type { NewsOutputItem } from '~/types/NewsOutputItem'
+import type { NewsDisplayOption } from '~/types/NewsDisplayOption'
 import type { ResourceItem } from '~/types/ResourceItem'
 
 export default Vue.extend({
-  data() {
-    return {
-      selectedResource: this.$route.query.resource || null,
-      resources: this.$store.state.resources as ResourceItem[],
-      newsOutputTypes: this.$store.state.newsOutputTypes as NewsOutputItem[]
-    }
+  props: {
+    displayOptions: {
+      type: Array,
+      required: true
+    } as PropOptions<Array<NewsDisplayOption>>,
+    resourceArray: {
+      type: Array,
+      required: true
+    } as PropOptions<Array<ResourceItem>>
   },
-  watch: {
-    $route: {
-      handler(to) {
-        this.selectedResource = to.query.resource || null
+  computed: {
+    activeResourceFilter: {
+      get() {
+        return this.$store.getters.getResourceFilter
       },
-      immediate: true
+      set(value: string) {
+        this.$store.dispatch('handleResourceFilter', value)
+      }
     }
   },
   methods: {
     handleResourceFilter(resource: string): void {
-      const queries = this.$route.query
-      this.selectedResource = resource
-      this.$router.push({ query: { ...queries, resource } })
+      this.activeResourceFilter = resource
+      this.$router.push({ params: { page: '1' }, query: { ...this.$route.query, resource } })
+      this.$store.dispatch('handleResourceFilter', resource)
     },
-    handleNewsOutputType(type: string): void {
-      localStorage.setItem('NewsOutputType', type)
-
-      window.dispatchEvent(
-        new CustomEvent('news-output-type-localstorage-changed', {
-          detail: {
-            storage: localStorage.getItem('NewsOutputType')
-          }
-        })
-      )
+    handleNewsDisplayOption(optionType: string) {
+      this.$store.dispatch('changeNewsDisplayOption', optionType)
+      localStorage.setItem('newsDisplayOption', optionType)
     },
     handleResourceActiveClass(resource: string) {
-      if (!this.selectedResource && resource === 'all') {
+      if (!this.activeResourceFilter && resource === 'all') {
         return 'active'
       }
 
-      if (this.selectedResource === resource) {
+      if (this.activeResourceFilter === resource) {
         return 'active'
       }
+
       return 'default'
     }
   }
@@ -55,7 +54,7 @@ export default Vue.extend({
   <div class="filters">
     <ul class="list">
       <li
-        v-for="resource in $data.resources"
+        v-for="resource in resourceArray"
         :key="resource.name"
         :class="handleResourceActiveClass(resource.resource) + ' resource-item'"
         @click="handleResourceFilter(resource.resource)"
@@ -65,13 +64,13 @@ export default Vue.extend({
     </ul>
     <ul class="list">
       <li
-        v-for="item in $data.newsOutputTypes"
-        :key="item.type"
-        @click="handleNewsOutputType(item.type)"
+        v-for="option in displayOptions"
+        :key="option.type"
+        @click="handleNewsDisplayOption(option.type)"
       >
         <img
-          :src="item.imgName"
-          :alt="`Изображения типа отображения списка ${item.type}`"
+          :src="option.imgName"
+          :alt="`Изображения типа отображения списка ${option.type}`"
           :class="'active'"
         />
       </li>
@@ -88,6 +87,8 @@ export default Vue.extend({
 .list {
   @include flex-h-sb-v-center;
   gap: 10px;
+
+  @include without-select;
 }
 
 .resource-item {

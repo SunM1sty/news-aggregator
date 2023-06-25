@@ -1,52 +1,29 @@
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
 
 import type { NewsItem } from '~/types/NewsItem'
 
-type NewsArrayIndexes = {
-  start: number
-  end: number
-}
-
 export default Vue.extend({
   props: {
-    type: {
+    newsList: {
+      type: Array,
+      required: true
+    } as PropOptions<Array<NewsItem>>,
+    activeNewsDisplayOption: {
       type: String,
-      default: 'tiles'
-    }
-  },
-  data() {
-    return {
-      currentPage: Number(this.$route.params.page) as number,
-      perPage: this.$store.state.newsPerPage as number
-    }
-  },
-  computed: {
-    news(): NewsItem[] {
-      const start: number = (this.currentPage - 1) * this.perPage
-      const end: number = start + this.perPage
-      const indexes: NewsArrayIndexes = { start, end }
-
-      return this.$store.getters.getNewsOnPage(indexes)
-    }
-  },
-  created() {
-    this.$store.subscribe(action => {
-      if (action.type === 'handleFilteredNews') {
-        const start: number = (this.currentPage - 1) * this.perPage
-        const end: number = start + this.perPage
-        const indexes: NewsArrayIndexes = { start, end }
-        this.news = this.$store.getters.getNewsOnPage(indexes)
-      }
-    })
+      required: true
+    } as PropOptions<string>
   }
 })
 </script>
 
 <template>
-  <ul v-if="news.length" :class="type === 'list' ? 'news-list' : 'news-tiles'">
-    <li v-for="item in news" :key="item.id" class="news-item">
-      <NewsItem :type="type" :news-item="item" />
+  <ul
+    v-if="newsList.length"
+    :class="activeNewsDisplayOption === 'list' ? 'news-list' : 'news-tiles'"
+  >
+    <li v-for="item in newsList" :key="item.id" class="news-item">
+      <NewsItem :news-item="item" :display-type="activeNewsDisplayOption" />
     </li>
   </ul>
   <p v-else class="text-warning">На этой странице новостей нет</p>

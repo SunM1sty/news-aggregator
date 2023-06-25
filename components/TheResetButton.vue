@@ -3,8 +3,9 @@ import Vue from 'vue'
 export default Vue.extend({
   methods: {
     handleResetFilters(): void {
-      this.$router.push({ path: this.$route.path })
-      this.$store.dispatch('fetchNews')
+      this.$store.dispatch('handleClearFilter')
+      this.$router.push({ params: { page: '1' } })
+      this.$store.dispatch('updateNewsList')
     }
   }
 })
